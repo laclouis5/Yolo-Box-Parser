@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B9257BCC22DD0AB000E702FB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BCB22DD0AB000E702FB /* main.swift */; };
+		B9257BD322DD0AD600E702FB /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD222DD0AD600E702FB /* Box.swift */; };
+		B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
+		B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		B9257BC822DD0AB000E702FB /* YoloParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = YoloParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9257BCB22DD0AB000E702FB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B9257BD222DD0AD600E702FB /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxes.swift; sourceTree = "<group>"; };
+		B9257BD622DD0B3700E702FB /* YoloParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoloParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				B9257BCB22DD0AB000E702FB /* main.swift */,
+				B9257BD622DD0B3700E702FB /* YoloParser.swift */,
+				B9257BD222DD0AD600E702FB /* Box.swift */,
+				B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */,
 			);
 			path = YoloParser;
 			sourceTree = "<group>";
@@ -119,7 +128,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */,
 				B9257BCC22DD0AB000E702FB /* main.swift in Sources */,
+				B9257BD322DD0AD600E702FB /* Box.swift in Sources */,
+				B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +258,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9BR37CM74X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -256,6 +272,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9BR37CM74X;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

@@ -18,7 +18,6 @@ enum YoloParserError: Error {
 }
 
 func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
-    
     var boxes = [Box]()
     
     guard let content = try? String(contentsOf: fileURL, encoding: .utf8) else {
@@ -26,6 +25,7 @@ func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
     }
     
     let imageURL = fileURL.deletingPathExtension().appendingPathExtension("jpg")
+    // FIXME: NSImage uses too much space whith large images
     guard let imgSize = NSImage(contentsOf: imageURL)?.size else {
         throw YoloParserError.unreadableImage(imageURL)
     }
@@ -81,5 +81,6 @@ func parseYoloFolder(_ folder: URL) throws -> [Box] {
             print("Unable to create a Box object for line: \(line) of file: \(fileURL)")
         }
     }
+    
     return boxes
 }

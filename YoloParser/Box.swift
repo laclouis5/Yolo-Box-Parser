@@ -9,6 +9,7 @@
 import Foundation
 
 struct Box: Equatable, CustomStringConvertible {
+    // MARK: - Nested Structures and Enumerations
     enum CoordType: Equatable {
         case XYWH
         case XYX2Y2
@@ -24,7 +25,7 @@ struct Box: Equatable, CustomStringConvertible {
         case Detection(confidence: Double)
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     let name: String
     let x, y, w, h: Double
     let label: String
@@ -33,8 +34,36 @@ struct Box: Equatable, CustomStringConvertible {
     let coordSystem: CoordinateSystem
     let detectionMode: DetectionMode
     
-    // MARK: Initalizers
+    var description: String {
+        var description = "\(self.label):"
+        switch self.coordType {
+        case .XYX2Y2:
+            description += " (xMin: \(self.x), yMin: \(self.y), xMax: \(self.w), yMax: \(self.h))"
+        default:
+            description += " (x: \(self.x), y: \(self.y), w: \(self.w), h: \(self.h))"
+        }
+        
+        switch self.coordSystem {
+        case .absolute:
+            description += " abs. coords"
+        default:
+            description += " rel. coords"
+        }
+        
+        switch self.detectionMode {
+        case .groundTruth:
+            description += ", ground truth"
+        case let .Detection(confidence: confidence):
+            description += ", detection with confidence \(confidence)"
+        }
+        
+        return description
+    }
+    
+    // MARK: - Initalizers
     init?(name: String, a: Double, b: Double, c: Double, d: Double, label: String, coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, imgSize: NSSize? = nil, detectionMode : DetectionMode = .groundTruth) {
+        //FIXME: Change data storage format
+        // It would be smarter to store raw coordinates and only ask imgSize if absolute coordinates (or ask it every time). Only convert to absolute (or relative) XYWH for computations.
         self.name = name
         self.label = label
         self.coordType = coordType
@@ -68,7 +97,7 @@ struct Box: Equatable, CustomStringConvertible {
         self.init(name: name, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: coordSystem, imgSize: imgSize, detectionMode: detectionMode)
     }
     
-    // MARK: Methods
+    // MARK: - Methods
     func getRawBoundingBox(coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, imgSize: NSSize? = nil) -> (Double, Double, Double, Double)? {
         var a, b, c, d: Double
         
@@ -105,6 +134,7 @@ struct Box: Equatable, CustomStringConvertible {
         return intersection / union
     }
     
+    // MARK: - Type Methods
     static func convertToXYX2Y2(x: Double, y: Double, w: Double, h: Double) -> (xMin: Double, yMin: Double, xMax: Double, yMax: Double) {
         return (x - w/2.0, y - h/2.0, x + w/2.0, y + h/2.0)
     }
@@ -121,31 +151,5 @@ struct Box: Equatable, CustomStringConvertible {
     
     static func convertToAbsolute(a: Double, b: Double, c: Double, d: Double, imgSize: NSSize) -> (Double, Double, Double, Double) {
         return (a*Double(imgSize.width), b*Double(imgSize.height), c*Double(imgSize.width), d*Double(imgSize.height))
-    }
-    
-    var description: String {
-        var description = "\(self.label):"
-        switch self.coordType {
-        case .XYX2Y2:
-            description += " (xMin: \(self.x), yMin: \(self.y), xMax: \(self.w), yMax: \(self.h))"
-        default:
-            description += " (x: \(self.x), y: \(self.y), w: \(self.w), h: \(self.h))"
-        }
-        
-        switch self.coordSystem {
-        case .absolute:
-            description += " abs. coords"
-        default:
-            description += " rel. coords"
-        }
-        
-        switch self.detectionMode {
-        case .groundTruth:
-            description += ", ground truth"
-        case let .Detection(confidence: confidence):
-            description += ", detection with confidence \(confidence)"
-        }
-        
-        return description
     }
 }

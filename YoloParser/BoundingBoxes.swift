@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension MutableCollection where Element == Box {
+extension Array where Element == Box {
     // MARK: - Computed Properties
     var labels: [String] {
         var labels = [String]()
@@ -30,6 +30,23 @@ extension MutableCollection where Element == Box {
             }
         }
         return imageNames.sorted()
+    }
+    
+    func dispStats() {
+        var description = ""
+        let boxNumber = self.count
+        let imageNumber = imageNames.count
+        let labelNumber = labels.count
+        
+        description += "Total number of images: \(imageNumber)\n"
+        description += "Total number of annotations: \(boxNumber)\n"
+        description += "Number of labels: \(labelNumber)\n"
+        
+        for label in labels {
+            description += "\(label): \(self.getBoundingBoxesByLabel(label).count)\n"
+        }
+        
+        print(description)
     }
     
     // MARK: - Methods
@@ -54,16 +71,22 @@ extension MutableCollection where Element == Box {
     }
     
     mutating func mapLabels(with labels: [String: String]) {
-        // FIXME: Make this function tyo accept all kind of dict
+        // FIXME: Make this function to accept all kind of dict
+        guard Set(labels.keys) == Set(self.labels) else {
+            print("Error: new label keys must match old labels")
+            return
+        }
+            
         self = self.map {
             // Boxes are always stored as absolute XYWH
             Box(name: $0.name,
                 a: $0.x, b: $0.y, c: $0.w, d: $0.h,
-                label: labels[$0.label] ?? "Unknown",
+                label: labels[$0.label]!,
                 coordType: .XYWH,
                 coordSystem: .absolute,
                 imgSize: $0.imgSize,
-                detectionMode: $0.detectionMode)!
-        } as! Self
+                detectionMode: $0.detectionMode,
+                confidence: $0.confidence)!
+        }
     }
 }

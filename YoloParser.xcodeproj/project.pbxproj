@@ -11,6 +11,7 @@
 		B9257BD322DD0AD600E702FB /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD222DD0AD600E702FB /* Box.swift */; };
 		B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
 		B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
+		B9EEAB1622E2118700EED07D /* PascalVOCMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		B9257BD222DD0AD600E702FB /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxes.swift; sourceTree = "<group>"; };
 		B9257BD622DD0B3700E702FB /* YoloParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoloParser.swift; sourceTree = "<group>"; };
+		B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PascalVOCMetrics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				B9257BCB22DD0AB000E702FB /* main.swift */,
+				B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */,
 				B9257BD622DD0B3700E702FB /* YoloParser.swift */,
 				B9257BD222DD0AD600E702FB /* Box.swift */,
 				B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */,
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9EEAB1622E2118700EED07D /* PascalVOCMetrics.swift in Sources */,
 				B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */,
 				B9257BCC22DD0AB000E702FB /* main.swift in Sources */,
 				B9257BD322DD0AD600E702FB /* Box.swift in Sources */,

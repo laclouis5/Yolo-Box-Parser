@@ -30,30 +30,42 @@ func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
         throw YoloParserError.unreadableImage(imageURL)
     }
     
-    
     for line in content.split(separator: "\n") {
         let line = line.split(separator: " ")
-        guard line.count == 5 else {
-            throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
-        }
-        
+ 
         let label = String(line[0])
         
-        guard let x = Double(line[1]), let y = Double(line[2]), let w = Double(line[3]), let h = Double(line[4]) else {
+        if line.count == 5 {
+            guard let x = Double(line[1]), let y = Double(line[2]), let w = Double(line[3]), let h = Double(line[4]) else {
+                
+                throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
+            }
+            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative, imgSize: NSSize(width: imgSize.width, height: imgSize.height), detectionMode: .groundTruth) else {
+                
+                throw YoloParserError.boxObjectNotInitializable(file: fileURL, line: line.map { String($0) })
+            }
+            
+            boxes.append(box)
+            
+        } else if line.count == 6 {
+            guard let confidence = Double(line[1]), let x = Double(line[2]), let y = Double(line[3]), let w = Double(line[4]), let h = Double(line[5]) else {
+                
+                throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
+            }
+            
+            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative, imgSize: NSSize(width: imgSize.width, height: imgSize.height), detectionMode: .detection, confidence: confidence) else {
+                
+                throw YoloParserError.boxObjectNotInitializable(file: fileURL, line: line.map { String($0) })
+            }
+            
+            boxes.append(box)
+            
+        } else {
             throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
         }
-        
-        guard let box = Box(name: fileURL.absoluteString,
-                            a: x, b: y, c: w, d: h,
-                            label: label,
-                            coordType: .XYWH,
-                            coordSystem: .relative,
-                            imgSize: NSSize(width: imgSize.width, height: imgSize.height),
-                            detectionMode: .groundTruth) else {
-                                throw YoloParserError.boxObjectNotInitializable(file: fileURL, line: line.map { String($0) })
-        }
-        boxes.append(box)
+    
     }
+    
     return boxes
 }
 

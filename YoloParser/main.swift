@@ -7,16 +7,22 @@
 //
 
 import Foundation
-
-let basePath = URL(fileURLWithPath: "/Users/louislac/Documents/Etudes/PhD/Projet BIPBIP/darknet/data/val")
-
+// TODO: Transform the app in a Mac application
+let basePath = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+let pathGT = basePath.appendingPathComponent("ground-truth")
+let pathDet = basePath.appendingPathComponent("detection-results")
 do {
-    var boxes = try parseYoloFolder(basePath)
-    print(boxes[0])
-    boxes.mapLabels(with: ["0": "maize", "1": "bean", "2": "carrot"])
-    print(boxes[0])
+    var boxes = try parseYoloFolder(pathGT)
+    boxes += try parseYoloFolder(pathDet)
+    boxes.dispStats()
+    
+    let evaluator = PascalVOCMetrics()
+    evaluator.evaluate(on: boxes, IoUThreshold: 0.5)
+    
+    evaluator.detail.forEach { (eval) in
+        print(eval)
+    }
+    
 } catch YoloParserError.folderNotListable(let folderURL){
     print("Folder not readable: \(folderURL)")
 }
-
-let imageURL: URL = basePath.appendingPathComponent("im_600.jpg")

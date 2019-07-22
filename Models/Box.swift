@@ -33,7 +33,13 @@ struct Box: CustomStringConvertible {
     let confidence: Double?
     let coordType: CoordType
     let coordSystem: CoordinateSystem
-    let detectionMode: DetectionMode
+    var detectionMode: DetectionMode {
+        if confidence != nil {
+            return .detection
+        } else {
+            return .groundTruth
+        }
+    }
     
     var description: String {
         var description = "\(self.label):"
@@ -62,54 +68,29 @@ struct Box: CustomStringConvertible {
     }
     
     // MARK: - Initalizers
-    init?(name: String, a: Double, b: Double, c: Double, d: Double, label: String, coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, imgSize: NSSize? = nil, detectionMode : DetectionMode = .groundTruth, confidence: Double? = nil) {
-        //FIXME: Change data storage format
-        // It would be smarter to store raw coordinates and only ask imgSize if absolute coordinates (or ask it every time). Only convert to absolute (or relative) XYWH for computations.
+    init?(name: String, a: Double, b: Double, c: Double, d: Double, label: String, coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
         self.name = name
         self.label = label
         self.coordType = coordType
         self.coordSystem = coordSystem
-        self.detectionMode = detectionMode
         self.imgSize = imgSize
         self.confidence = confidence
         
-        var xTemp, yTemp, wTemp, hTemp: Double
-        
         switch coordType {
         case .XYWH:
-            (xTemp, yTemp, wTemp, hTemp) = (a, b, c, d)
+            (x, y, w, h) = (a, b, c, d)
         case .XYX2Y2:
-            (xTemp, yTemp, wTemp, hTemp) = Box.convertToXYWH(xMin: a, yMin: b, xMax: c, yMax: d)
-        }
-        
-        switch coordSystem {
-        case .relative:
-            guard let imgSize = imgSize else {
-                print("Error: must provide img size when using relative coordinates")
-                return nil
-            }
-            (x, y, w, h) = Box.convertToAbsolute(a: xTemp, b: yTemp, c: wTemp, d: hTemp, imgSize: imgSize)
-        default:
-            (x, y, w, h) = (xTemp, yTemp, wTemp, hTemp)
-        }
-        
-        switch detectionMode {
-        case .detection:
-            guard confidence != nil else {
-                print("Error: must provide confidence when using Detection mode")
-                return nil
-            }
-        default:
-            break
+            (x, y, w, h) = Box.convertToXYWH(xMin: a, yMin: b, xMax: c, yMax: d)
         }
     }
     
-    init?(name: String, rect: CGRect, label: String, coordSystem: CoordinateSystem = .absolute, imgSize: NSSize? = nil, detectionMode: DetectionMode = .groundTruth, confidence: Double? = nil) {
+    init?(name: String, rect: CGRect, label: String, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
         let (x, y, w, h) = (Double(rect.midX), Double(rect.midY), Double(rect.width), Double(rect.height))
-        self.init(name: name, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: coordSystem, imgSize: imgSize, detectionMode: detectionMode, confidence: confidence)
+        self.init(name: name, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: coordSystem, confidence: confidence, imgSize: imgSize)
     }
     
     // MARK: - Methods
+    // FIXME: Obsolete, change it
     func getRawBoundingBox(coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, imgSize: NSSize? = nil) -> (Double, Double, Double, Double)? {
         var a, b, c, d: Double
         
@@ -135,6 +116,7 @@ struct Box: CustomStringConvertible {
     }
     
     func computeIoU(with box: Box) -> Double {
+        //FIXME: change Box structure to accept all kinds of boxes (XYWH, XYX2Y2) and only compute XYX2Y2 when needed. do not necesarily systematically convert to XYWH
         let (xMin1, yMin1, xMax1, yMax1) = Box.convertToXYX2Y2(x: x, y: y, w: w, h: h)
         let (xMin2, yMin2, xMax2, yMax2) = Box.convertToXYX2Y2(x: box.x, y: box.y, w: box.w, h: box.h)
         

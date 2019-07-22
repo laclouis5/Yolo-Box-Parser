@@ -71,7 +71,7 @@ extension Array where Element == Box {
     }
     
     mutating func mapLabels(with labels: [String: String]) {
-        // FIXME: Make this function to accept all kind of dict
+        // FIXME: Make this function to accept all kind of dict, not only String
         guard Set(labels.keys) == Set(self.labels) else {
             print("Error: new label keys must match old labels")
             return
@@ -84,9 +84,8 @@ extension Array where Element == Box {
                 label: labels[$0.label]!,
                 coordType: .XYWH,
                 coordSystem: .absolute,
-                imgSize: $0.imgSize,
-                detectionMode: $0.detectionMode,
-                confidence: $0.confidence)!
+                confidence: $0.confidence,
+                imgSize: $0.imgSize)!
         }
     }
 }

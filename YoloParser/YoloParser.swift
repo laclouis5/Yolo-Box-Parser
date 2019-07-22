@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import AppKit
 
 enum YoloParserError: Error {
     case folderNotListable(_ folder: URL)
     case unreadableAnnotation(_ file: URL)
-    case unreadableImage(_ image: URL)
+    case unreadableImage(_ image: URL) // Obsolete
     case invalidLineFormat(file: URL, line: [String])
     case boxObjectNotInitializable(file: URL, line: [String])
 }
@@ -22,12 +21,6 @@ func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
     
     guard let content = try? String(contentsOf: fileURL, encoding: .utf8) else {
         throw YoloParserError.unreadableAnnotation(fileURL)
-    }
-    
-    let imageURL = fileURL.deletingPathExtension().appendingPathExtension("jpg")
-    // FIXME: NSImage uses too much space whith large images
-    guard let imgSize = NSImage(contentsOf: imageURL)?.size else {
-        throw YoloParserError.unreadableImage(imageURL)
     }
     
     for line in content.split(separator: "\n") {
@@ -40,7 +33,7 @@ func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
                 
                 throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
             }
-            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative, imgSize: NSSize(width: imgSize.width, height: imgSize.height), detectionMode: .groundTruth) else {
+            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative) else {
                 
                 throw YoloParserError.boxObjectNotInitializable(file: fileURL, line: line.map { String($0) })
             }
@@ -53,7 +46,7 @@ func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
                 throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
             }
             
-            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative, imgSize: NSSize(width: imgSize.width, height: imgSize.height), detectionMode: .detection, confidence: confidence) else {
+            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative, confidence: confidence) else {
                 
                 throw YoloParserError.boxObjectNotInitializable(file: fileURL, line: line.map { String($0) })
             }
@@ -85,8 +78,6 @@ func parseYoloFolder(_ folder: URL) throws -> [Box] {
             
         } catch YoloParserError.unreadableAnnotation(let fileURL) {
             print("Unable to read annotation file: \(fileURL)")
-        } catch YoloParserError.unreadableImage(let imageURL) {
-            print("Unable to read image file: \(imageURL)")
         } catch YoloParserError.invalidLineFormat(let fileURL, let line) {
             print("Invalid line format: \(line) for file: \(fileURL)")
         } catch YoloParserError.boxObjectNotInitializable(let fileURL, let line) {

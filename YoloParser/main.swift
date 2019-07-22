@@ -18,7 +18,7 @@ do {
     boxes.dispStats()
     
     let evaluator = PascalVOCMetrics()
-    evaluator.evaluate(on: boxes, IoUThreshold: 0.5)
+    evaluator.evaluate(on: boxes)
     
     evaluator.detail.forEach { (eval) in
         print(eval)

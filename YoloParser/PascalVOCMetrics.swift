@@ -34,7 +34,7 @@ class PascalVOCMetrics {
     var detail = [Evaluation]()
     
     //MARK: - Methods
-    func evaluate(on boxes: [Box], IoUThreshold: Double) {
+    func evaluate(on boxes: [Box], iouTresh: Double = 0.5) {
         // Loop through each class
         for label in boxes.labels {
             var evaluation = Evaluation()
@@ -48,6 +48,7 @@ class PascalVOCMetrics {
             evaluation.totalPositive = groundTruthBoxes.count
             
             // Loop through images
+            // Don't know if its a good idea... Maybe just go through sorted boxes
             for image in detectionBoxes.imageNames {
                 var detections = detectionBoxes.getBoundingBoxesByName(image)
                 let groundTruth = groundTruthBoxes.getBoundingBoxesByName(image)
@@ -74,7 +75,7 @@ class PascalVOCMetrics {
                         }
                     }
                         
-                    if maxIoU >= IoUThreshold && !visited[index] {
+                    if maxIoU >= iouTresh && !visited[index] {
                         evaluation.truePositive.append(true)
                         visited[index] = true
                         

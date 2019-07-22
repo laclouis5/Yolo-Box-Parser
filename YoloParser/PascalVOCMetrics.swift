@@ -9,8 +9,11 @@
 import Foundation
 
 class PascalVOCMetrics {
+    // Not usable for now, still got errors
     //MARK: - Properties
     struct Evaluation: CustomStringConvertible {
+        // We now in advance the size of this structure, memory could be reserved instead of appening items for each detection
+        // Also it seems sub-optimal to compute true/false positive number with filtering
         var label = ""
         var mAP = 0.0
         var truePositive = [Bool]()
@@ -19,7 +22,7 @@ class PascalVOCMetrics {
         var recall = [Double]()
         
         var description: String {
-            var description = "Label: \(label)\n"
+            var description = "\(label.uppercased())\n"
             description += "  Total Positive: \(totalPositive)\n"
             description += "  True Positive:  \(truePositive.filter { $0 }.count)\n"
             description += "  False Positive: \(truePositive.count - truePositive.filter { $0 }.count)\n"
@@ -59,7 +62,7 @@ class PascalVOCMetrics {
                 
                 // Loop through image detections
                 for detection in detections {
-                    var maxIoU = Double.leastNonzeroMagnitude
+                    var maxIoU = 0.0
                     
                     // Loop through image GT
                     for (i, groundTruth) in groundTruth.enumerated() {

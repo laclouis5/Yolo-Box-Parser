@@ -12,6 +12,7 @@
 		B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
 		B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
 		B9EEAB1622E2118700EED07D /* PascalVOCMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */; };
+		B9EEAB1822E4EFD100EED07D /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1722E4EFD100EED07D /* TestData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,8 @@
 		B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxes.swift; sourceTree = "<group>"; };
 		B9257BD622DD0B3700E702FB /* YoloParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoloParser.swift; sourceTree = "<group>"; };
 		B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PascalVOCMetrics.swift; sourceTree = "<group>"; };
+		B9EEAB1722E4EFD100EED07D /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		B9EEAB1B22E4F80800EED07D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				B9257BCA22DD0AB000E702FB /* YoloParser */,
+				B9EEAB2D22E5B1C700EED07D /* Models */,
 				B9257BC922DD0AB000E702FB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,12 +70,21 @@
 			isa = PBXGroup;
 			children = (
 				B9257BCB22DD0AB000E702FB /* main.swift */,
-				B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */,
 				B9257BD622DD0B3700E702FB /* YoloParser.swift */,
+				B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */,
+				B9EEAB1722E4EFD100EED07D /* TestData.swift */,
+				B9EEAB1B22E4F80800EED07D /* README.md */,
+			);
+			path = YoloParser;
+			sourceTree = "<group>";
+		};
+		B9EEAB2D22E5B1C700EED07D /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				B9257BD222DD0AD600E702FB /* Box.swift */,
 				B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */,
 			);
-			path = YoloParser;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +147,7 @@
 				B9EEAB1622E2118700EED07D /* PascalVOCMetrics.swift in Sources */,
 				B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */,
 				B9257BCC22DD0AB000E702FB /* main.swift in Sources */,
+				B9EEAB1822E4EFD100EED07D /* TestData.swift in Sources */,
 				B9257BD322DD0AD600E702FB /* Box.swift in Sources */,
 				B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */,
 			);

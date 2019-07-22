@@ -38,9 +38,9 @@ extension Array where Element == Box {
         let imageNumber = imageNames.count
         let labelNumber = labels.count
         
-        description += "Total number of images: \(imageNumber)\n"
-        description += "Total number of annotations: \(boxNumber)\n"
-        description += "Number of labels: \(labelNumber)\n"
+        description += "Number of images:      \(imageNumber)\n"
+        description += "Number of annotations: \(boxNumber)\n"
+        description += "Number of labels:      \(labelNumber)\n"
         
         for label in labels {
             description += "\(label): \(self.getBoundingBoxesByLabel(label).count)\n"

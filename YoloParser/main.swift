@@ -7,13 +7,14 @@
 //
 
 import Foundation
+
 // TODO: Transform the app in a Mac application
 let basePath = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
 let pathGT = basePath.appendingPathComponent("ground-truth")
 let pathDet = basePath.appendingPathComponent("detection-results")
 do {
     var boxes = try parseYoloFolder(pathGT)
-    boxes += try parseYoloFolder(pathDet)
+    boxes += try parseYoloFolder(pathDet)    
     boxes.dispStats()
     
     let evaluator = PascalVOCMetrics()

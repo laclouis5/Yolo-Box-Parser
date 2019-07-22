@@ -13,7 +13,6 @@ enum YoloParserError: Error {
     case unreadableAnnotation(_ file: URL)
     case unreadableImage(_ image: URL) // Obsolete
     case invalidLineFormat(file: URL, line: [String])
-    case boxObjectNotInitializable(file: URL, line: [String])
 }
 
 func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
@@ -28,35 +27,31 @@ func parseYoloTxtFile(_ fileURL: URL) throws -> [Box] {
  
         let label = String(line[0])
         
+        // Case Ground Truth
         if line.count == 5 {
             guard let x = Double(line[1]), let y = Double(line[2]), let w = Double(line[3]), let h = Double(line[4]) else {
                 
                 throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
             }
-            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative) else {
-                
-                throw YoloParserError.boxObjectNotInitializable(file: fileURL, line: line.map { String($0) })
-            }
+            
+            let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative)
             
             boxes.append(box)
             
+        // Case Detection
         } else if line.count == 6 {
             guard let confidence = Double(line[1]), let x = Double(line[2]), let y = Double(line[3]), let w = Double(line[4]), let h = Double(line[5]) else {
                 
                 throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
             }
             
-            guard let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative, confidence: confidence) else {
-                
-                throw YoloParserError.boxObjectNotInitializable(file: fileURL, line: line.map { String($0) })
-            }
+            let box = Box(name: fileURL.lastPathComponent, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: .relative, confidence: confidence)
             
             boxes.append(box)
             
         } else {
             throw YoloParserError.invalidLineFormat(file: fileURL, line: line.map { String($0) })
         }
-    
     }
     
     return boxes
@@ -80,8 +75,6 @@ func parseYoloFolder(_ folder: URL) throws -> [Box] {
             print("Unable to read annotation file: \(fileURL)")
         } catch YoloParserError.invalidLineFormat(let fileURL, let line) {
             print("Invalid line format: \(line) for file: \(fileURL)")
-        } catch YoloParserError.boxObjectNotInitializable(let fileURL, let line) {
-            print("Unable to create a Box object for line: \(line) of file: \(fileURL)")
         }
     }
     

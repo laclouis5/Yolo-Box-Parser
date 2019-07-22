@@ -33,17 +33,21 @@ extension Array where Element == Box {
     }
     
     func dispStats() {
+        let gtBoxes = self.getBoundingBoxesByDetectionMode(.groundTruth)
+        let detBoxes = self.getBoundingBoxesByDetectionMode(.detection)
+        
         var description = ""
-        let boxNumber = self.count
-        let imageNumber = imageNames.count
-        let labelNumber = labels.count
+//        description += "Number of gt images: \(gtBoxes.imageNames.count)\n"
+        description += "Ground Truth Count: \(gtBoxes.count)\n"
+        description += "Detection Count:    \(detBoxes.count)\n"
+        description += "Number of labels:   \(gtBoxes.labels.count)\n"
         
-        description += "Number of images:      \(imageNumber)\n"
-        description += "Number of annotations: \(boxNumber)\n"
-        description += "Number of labels:      \(labelNumber)\n"
-        
-        for label in labels {
-            description += "\(label): \(self.getBoundingBoxesByLabel(label).count)\n"
+        for label in gtBoxes.labels {
+            let labelBoxes = gtBoxes.getBoundingBoxesByLabel(label)
+            
+            description += "\(label.uppercased())\n"
+            description += "  Images:      \(labelBoxes.imageNames.count)\n"
+            description += "  Annotations: \(labelBoxes.count)\n"
         }
         
         print(description)
@@ -85,7 +89,7 @@ extension Array where Element == Box {
                 coordType: .XYWH,
                 coordSystem: .absolute,
                 confidence: $0.confidence,
-                imgSize: $0.imgSize)!
+                imgSize: $0.imgSize)
         }
     }
 }

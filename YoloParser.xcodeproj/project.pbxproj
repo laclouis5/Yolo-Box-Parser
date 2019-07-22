@@ -11,8 +11,14 @@
 		B9257BD322DD0AD600E702FB /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD222DD0AD600E702FB /* Box.swift */; };
 		B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
 		B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
-		B9EEAB1622E2118700EED07D /* PascalVOCMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */; };
+		B9EEAB1622E2118700EED07D /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* Evaluator.swift */; };
 		B9EEAB1822E4EFD100EED07D /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1722E4EFD100EED07D /* TestData.swift */; };
+		B9EF25E422E6646B002D7BB4 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EF25E322E6646B002D7BB4 /* Tests.swift */; };
+		B9EF25E522E66489002D7BB4 /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
+		B9EF25E622E6648D002D7BB4 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* Evaluator.swift */; };
+		B9EF25E722E6648F002D7BB4 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1722E4EFD100EED07D /* TestData.swift */; };
+		B9EF25E822E66492002D7BB4 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD222DD0AD600E702FB /* Box.swift */; };
+		B9EF25E922E66494002D7BB4 /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,13 +39,23 @@
 		B9257BD222DD0AD600E702FB /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxes.swift; sourceTree = "<group>"; };
 		B9257BD622DD0B3700E702FB /* YoloParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoloParser.swift; sourceTree = "<group>"; };
-		B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PascalVOCMetrics.swift; sourceTree = "<group>"; };
+		B9EEAB1522E2118700EED07D /* Evaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
 		B9EEAB1722E4EFD100EED07D /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		B9EEAB1B22E4F80800EED07D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B9EF25DB22E66432002D7BB4 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9EF25DF22E66432002D7BB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9EF25E322E6646B002D7BB4 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B9257BC522DD0AB000E702FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9EF25D822E66432002D7BB4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -54,6 +70,7 @@
 			children = (
 				B9257BCA22DD0AB000E702FB /* YoloParser */,
 				B9EEAB2D22E5B1C700EED07D /* Models */,
+				B9EF25DC22E66432002D7BB4 /* Tests */,
 				B9257BC922DD0AB000E702FB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				B9257BC822DD0AB000E702FB /* YoloParser */,
+				B9EF25DB22E66432002D7BB4 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,7 +89,7 @@
 			children = (
 				B9257BCB22DD0AB000E702FB /* main.swift */,
 				B9257BD622DD0B3700E702FB /* YoloParser.swift */,
-				B9EEAB1522E2118700EED07D /* PascalVOCMetrics.swift */,
+				B9EEAB1522E2118700EED07D /* Evaluator.swift */,
 				B9EEAB1722E4EFD100EED07D /* TestData.swift */,
 				B9EEAB1B22E4F80800EED07D /* README.md */,
 			);
@@ -85,6 +103,15 @@
 				B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B9EF25DC22E66432002D7BB4 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B9EF25E322E6646B002D7BB4 /* Tests.swift */,
+				B9EF25DF22E66432002D7BB4 /* Info.plist */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,6 +134,23 @@
 			productReference = B9257BC822DD0AB000E702FB /* YoloParser */;
 			productType = "com.apple.product-type.tool";
 		};
+		B9EF25DA22E66432002D7BB4 /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9EF25E022E66432002D7BB4 /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				B9EF25D722E66432002D7BB4 /* Sources */,
+				B9EF25D822E66432002D7BB4 /* Frameworks */,
+				B9EF25D922E66432002D7BB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = B9EF25DB22E66432002D7BB4 /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -118,6 +162,9 @@
 				ORGANIZATIONNAME = "Louis Lac";
 				TargetAttributes = {
 					B9257BC722DD0AB000E702FB = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					B9EF25DA22E66432002D7BB4 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
@@ -135,21 +182,45 @@
 			projectRoot = "";
 			targets = (
 				B9257BC722DD0AB000E702FB /* YoloParser */,
+				B9EF25DA22E66432002D7BB4 /* Tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B9EF25D922E66432002D7BB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B9257BC422DD0AB000E702FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9EEAB1622E2118700EED07D /* PascalVOCMetrics.swift in Sources */,
+				B9EEAB1622E2118700EED07D /* Evaluator.swift in Sources */,
 				B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */,
 				B9257BCC22DD0AB000E702FB /* main.swift in Sources */,
 				B9EEAB1822E4EFD100EED07D /* TestData.swift in Sources */,
 				B9257BD322DD0AD600E702FB /* Box.swift in Sources */,
 				B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9EF25D722E66432002D7BB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9EF25E422E6646B002D7BB4 /* Tests.swift in Sources */,
+				B9EF25E522E66489002D7BB4 /* YoloParser.swift in Sources */,
+				B9EF25E622E6648D002D7BB4 /* Evaluator.swift in Sources */,
+				B9EF25E922E66494002D7BB4 /* BoundingBoxes.swift in Sources */,
+				B9EF25E722E6648F002D7BB4 /* TestData.swift in Sources */,
+				B9EF25E822E66492002D7BB4 /* Box.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +364,42 @@
 			};
 			name = Release;
 		};
+		B9EF25E122E66432002D7BB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9BR37CM74X;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = louislac.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B9EF25E222E66432002D7BB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9BR37CM74X;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = louislac.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -310,6 +417,15 @@
 			buildConfigurations = (
 				B9257BD022DD0AB000E702FB /* Debug */,
 				B9257BD122DD0AB000E702FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9EF25E022E66432002D7BB4 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9EF25E122E66432002D7BB4 /* Debug */,
+				B9EF25E222E66432002D7BB4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

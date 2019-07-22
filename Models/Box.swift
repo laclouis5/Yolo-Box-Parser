@@ -68,7 +68,7 @@ struct Box: CustomStringConvertible {
     }
     
     // MARK: - Initalizers
-    init?(name: String, a: Double, b: Double, c: Double, d: Double, label: String, coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
+    init(name: String, a: Double, b: Double, c: Double, d: Double, label: String, coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
         self.name = name
         self.label = label
         self.coordType = coordType
@@ -84,7 +84,7 @@ struct Box: CustomStringConvertible {
         }
     }
     
-    init?(name: String, rect: CGRect, label: String, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
+    init(name: String, rect: CGRect, label: String, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
         let (x, y, w, h) = (Double(rect.midX), Double(rect.midY), Double(rect.width), Double(rect.height))
         self.init(name: name, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: coordSystem, confidence: confidence, imgSize: imgSize)
     }
@@ -117,6 +117,16 @@ struct Box: CustomStringConvertible {
     
     func computeIoU(with box: Box) -> Double {
         //FIXME: change Box structure to accept all kinds of boxes (XYWH, XYX2Y2) and only compute XYX2Y2 when needed. do not necesarily systematically convert to XYWH
+//        var (xMin1, yMin1, xMax1, yMax1): (Double, Double, Double, Double)
+//        var (xMin2, yMin2, xMax2, yMax2): (Double, Double, Double, Double)
+//        
+//        switch (self.detectionMode, box.detectionMode) {
+//        case let (mode1, mode2) where mode1 != mode2:
+//
+//        default:
+//            break
+//        }
+//
         let (xMin1, yMin1, xMax1, yMax1) = Box.convertToXYX2Y2(x: x, y: y, w: w, h: h)
         let (xMin2, yMin2, xMax2, yMax2) = Box.convertToXYX2Y2(x: box.x, y: box.y, w: box.w, h: box.h)
         

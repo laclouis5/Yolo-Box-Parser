@@ -1,4 +1,5 @@
 #  Documentation
+Swift 5 implementation of mAP computation for Yolo-style detections.
 
 ## Yolo-Style Format for Annotations
 One TXT file for each image. Detections should be stored in  `detection-results` folder and ground truth in `ground-truth`. Coordinates are relative to the image size. Images should be stores as `.jpg` files in `image` folder.

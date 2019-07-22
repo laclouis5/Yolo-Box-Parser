@@ -68,6 +68,7 @@
 		B9257BBF22DD0AB000E702FB = {
 			isa = PBXGroup;
 			children = (
+				B9EEAB1B22E4F80800EED07D /* README.md */,
 				B9257BCA22DD0AB000E702FB /* YoloParser */,
 				B9EEAB2D22E5B1C700EED07D /* Models */,
 				B9EF25DC22E66432002D7BB4 /* Tests */,
@@ -91,7 +92,6 @@
 				B9257BD622DD0B3700E702FB /* YoloParser.swift */,
 				B9EEAB1522E2118700EED07D /* Evaluator.swift */,
 				B9EEAB1722E4EFD100EED07D /* TestData.swift */,
-				B9EEAB1B22E4F80800EED07D /* README.md */,
 			);
 			path = YoloParser;
 			sourceTree = "<group>";

@@ -11,14 +11,14 @@
 		B9257BD322DD0AD600E702FB /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD222DD0AD600E702FB /* Box.swift */; };
 		B9257BD522DD0B1100E702FB /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
 		B9257BD722DD0B3700E702FB /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
+		B9587A4722E76954009E93A9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BCB22DD0AB000E702FB /* main.swift */; };
+		B9587A4822E769C6009E93A9 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* Evaluator.swift */; };
+		B9587A4922E769C9009E93A9 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD222DD0AD600E702FB /* Box.swift */; };
+		B9587A4A22E769E3009E93A9 /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
+		B9587A4B22E769F7009E93A9 /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
 		B9EEAB1622E2118700EED07D /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* Evaluator.swift */; };
 		B9EEAB1822E4EFD100EED07D /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1722E4EFD100EED07D /* TestData.swift */; };
 		B9EF25E422E6646B002D7BB4 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EF25E322E6646B002D7BB4 /* Tests.swift */; };
-		B9EF25E522E66489002D7BB4 /* YoloParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD622DD0B3700E702FB /* YoloParser.swift */; };
-		B9EF25E622E6648D002D7BB4 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1522E2118700EED07D /* Evaluator.swift */; };
-		B9EF25E722E6648F002D7BB4 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EEAB1722E4EFD100EED07D /* TestData.swift */; };
-		B9EF25E822E66492002D7BB4 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD222DD0AD600E702FB /* Box.swift */; };
-		B9EF25E922E66494002D7BB4 /* BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9257BD422DD0B1100E702FB /* BoundingBoxes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -216,12 +216,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9587A4A22E769E3009E93A9 /* BoundingBoxes.swift in Sources */,
+				B9587A4B22E769F7009E93A9 /* YoloParser.swift in Sources */,
 				B9EF25E422E6646B002D7BB4 /* Tests.swift in Sources */,
-				B9EF25E522E66489002D7BB4 /* YoloParser.swift in Sources */,
-				B9EF25E622E6648D002D7BB4 /* Evaluator.swift in Sources */,
-				B9EF25E922E66494002D7BB4 /* BoundingBoxes.swift in Sources */,
-				B9EF25E722E6648F002D7BB4 /* TestData.swift in Sources */,
-				B9EF25E822E66492002D7BB4 /* Box.swift in Sources */,
+				B9587A4922E769C9009E93A9 /* Box.swift in Sources */,
+				B9587A4722E76954009E93A9 /* main.swift in Sources */,
+				B9587A4822E769C6009E93A9 /* Evaluator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

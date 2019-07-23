@@ -14,8 +14,9 @@ let pathGT = basePath.appendingPathComponent("ground-truth")
 let pathDet = basePath.appendingPathComponent("detection-results")
 
 do {
-    var boxes = try parseYoloFolder(pathGT)
-    boxes += try parseYoloFolder(pathDet)
+    let parser = Parser()
+    var boxes = try parser.parseYoloFolder(pathGT)
+    boxes += try parser.parseYoloFolder(pathDet)
 //    let boxes = TestData().data
     boxes.dispStats()
     
@@ -26,6 +27,6 @@ do {
         print(eval)
     }
     
-} catch YoloParserError.folderNotListable(let folderURL){
+} catch YoloParserError.folderNotListable(let folderURL) {
     print("Folder not readable: \(folderURL)")
 }

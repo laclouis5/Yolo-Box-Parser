@@ -11,14 +11,6 @@ import XCTest
 
 class BoxesTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testIoU() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -52,5 +44,32 @@ class BoxesTests: XCTestCase {
         
         XCTAssert(box1.x == 5 && box1.y == 5 && box1.w == 10 && box1.h == 10)
         XCTAssert(box2.x == 5 && box2.y == 5 && box2.w == 10 && box2.h == 10)
+    }
+}
+
+class YoloParserTests: XCTestCase {
+    
+    func testReadFile() {
+        let basePath = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+        let path = basePath.appendingPathComponent("ground-truth/im_726.jpg")
+        let parser = Parser()
+        
+        let refboxes = [
+            Box(name: "im_726.jpg", a: 1596, b: 438, c: 1817, d: 1370, label: "maize", coordType: .XYX2Y2),
+            Box(name: "im_726.jpg", a: 2000, b: 663, c: 2449, d: 896, label: "maize", coordType: .XYX2Y2),
+            Box(name: "im_726.jpg", a: 1622, b: 800, c: 1758, d: 934, label: "maize_stem", coordType: .XYX2Y2),
+            Box(name: "im_726.jpg", a: 2186, b: 723, c: 2341, d: 881, label: "maize_stem", coordType: .XYX2Y2)
+        ]
+        
+        do {
+            let boxes = try parser.parseYoloTxtFile(path, coordType: .XYX2Y2, coordSystem: .absolute)
+            
+            print(Set(boxes))
+            XCTAssert(Set(boxes) == Set(refboxes))
+            
+        } catch {
+            print("ERROR")
+            XCTAssert(true)
+        }
     }
 }

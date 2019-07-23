@@ -8,19 +8,24 @@
 
 import Foundation
 
-struct Box: CustomStringConvertible {
+struct Size: Equatable, Hashable {
+    let width, height: Int
+}
+
+struct Box: CustomStringConvertible, Hashable {
+    
     // MARK: - Definitions
-    enum CoordType {
+    enum CoordType: Equatable, Hashable {
         case XYWH
         case XYX2Y2
     }
-    
-    enum CoordinateSystem {
+
+    enum CoordinateSystem: Equatable, Hashable {
         case absolute
         case relative
     }
     
-    enum DetectionMode {
+    enum DetectionMode: Equatable, Hashable {
         case groundTruth
         case detection
     }
@@ -29,7 +34,7 @@ struct Box: CustomStringConvertible {
     let name: String
     let x, y, w, h: Double
     let label: String
-    let imgSize: NSSize?
+    let imgSize: Size?
     let confidence: Double?
     let coordType: CoordType
     let coordSystem: CoordinateSystem
@@ -68,7 +73,7 @@ struct Box: CustomStringConvertible {
     }
     
     // MARK: - Initalizers
-    init(name: String, a: Double, b: Double, c: Double, d: Double, label: String, coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
+    init(name: String, a: Double, b: Double, c: Double, d: Double, label: String, coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: Size? = nil) {
         self.name = name
         self.label = label
         self.coordType = coordType
@@ -84,14 +89,14 @@ struct Box: CustomStringConvertible {
         }
     }
     
-    init(name: String, rect: CGRect, label: String, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: NSSize? = nil) {
+    init(name: String, rect: CGRect, label: String, coordSystem: CoordinateSystem = .absolute, confidence: Double? = nil, imgSize: Size? = nil) {
         let (x, y, w, h) = (Double(rect.midX), Double(rect.midY), Double(rect.width), Double(rect.height))
         self.init(name: name, a: x, b: y, c: w, d: h, label: label, coordType: .XYWH, coordSystem: coordSystem, confidence: confidence, imgSize: imgSize)
     }
     
     // MARK: - Methods
     // FIXME: Obsolete, change it
-    func getRawBoundingBox(coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, imgSize: NSSize? = nil) -> (Double, Double, Double, Double)? {
+    func getRawBoundingBox(coordType: CoordType = .XYWH, coordSystem: CoordinateSystem = .absolute, imgSize: Size? = nil) -> (Double, Double, Double, Double)? {
         var a, b, c, d: Double
         
         switch coordType {
@@ -152,11 +157,11 @@ struct Box: CustomStringConvertible {
         return (xMin + w/2.0, yMin + h/2.0, w, h)
     }
     
-    static private func convertToRelative(a: Double, b: Double, c: Double, d: Double, imgSize: NSSize) -> (Double, Double, Double, Double) {
+    static private func convertToRelative(a: Double, b: Double, c: Double, d: Double, imgSize: Size) -> (Double, Double, Double, Double) {
         return (a/Double(imgSize.width), b/Double(imgSize.height), c/Double(imgSize.width), d/Double(imgSize.height))
     }
     
-    static private func convertToAbsolute(a: Double, b: Double, c: Double, d: Double, imgSize: NSSize) -> (Double, Double, Double, Double) {
+    static private func convertToAbsolute(a: Double, b: Double, c: Double, d: Double, imgSize: Size) -> (Double, Double, Double, Double) {
         return (a*Double(imgSize.width), b*Double(imgSize.height), c*Double(imgSize.width), d*Double(imgSize.height))
     }
 }

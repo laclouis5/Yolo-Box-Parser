@@ -9,7 +9,7 @@
 import Foundation
 
 class Evaluator {
-    // Not usable for now, still got different results than other repos
+
     //MARK: - Properties
     struct Evaluation: CustomStringConvertible {
         // We now in advance the size of this structure, memory could be reserved instead of appening items for each detection

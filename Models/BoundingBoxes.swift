@@ -9,6 +9,7 @@
 import Foundation
 
 extension Array where Element == Box {
+    
     // MARK: - Computed Properties
     var labels: [String] {
         var labels = [String]()
@@ -37,7 +38,6 @@ extension Array where Element == Box {
         let detBoxes = self.getBoundingBoxesByDetectionMode(.detection)
         
         var description = ""
-//        description += "Number of gt images: \(gtBoxes.imageNames.count)\n"
         description += "Ground Truth Count: \(gtBoxes.count)\n"
         description += "Detection Count:    \(detBoxes.count)\n"
         description += "Number of labels:   \(gtBoxes.labels.count)\n"

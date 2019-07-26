@@ -8,24 +8,24 @@
 
 import Foundation
 
-struct Size: Equatable, Hashable {
+struct Size: Hashable {
     let width, height: Int
 }
 
 struct Box: CustomStringConvertible, Hashable {
     
     // MARK: - Definitions
-    enum CoordType: Equatable, Hashable {
+    enum CoordType {
         case XYWH
         case XYX2Y2
     }
 
-    enum CoordinateSystem: Equatable, Hashable {
+    enum CoordinateSystem {
         case absolute
         case relative
     }
     
-    enum DetectionMode: Equatable, Hashable {
+    enum DetectionMode {
         case groundTruth
         case detection
     }

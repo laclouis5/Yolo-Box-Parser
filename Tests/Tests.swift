@@ -51,25 +51,23 @@ class YoloParserTests: XCTestCase {
     
     func testReadFile() {
         let basePath = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
-        let path = basePath.appendingPathComponent("ground-truth/im_726.jpg")
+        let path = basePath.appendingPathComponent("ground-truth").appendingPathComponent("im_726.txt")
         let parser = Parser()
         
         let refboxes = [
-            Box(name: "im_726.jpg", a: 1596, b: 438, c: 1817, d: 1370, label: "maize", coordType: .XYX2Y2),
-            Box(name: "im_726.jpg", a: 2000, b: 663, c: 2449, d: 896, label: "maize", coordType: .XYX2Y2),
-            Box(name: "im_726.jpg", a: 1622, b: 800, c: 1758, d: 934, label: "maize_stem", coordType: .XYX2Y2),
-            Box(name: "im_726.jpg", a: 2186, b: 723, c: 2341, d: 881, label: "maize_stem", coordType: .XYX2Y2)
+            Box(name: path.lastPathComponent, a: 1596, b: 438, c: 1817, d: 1370, label: "maize", coordType: .XYX2Y2),
+            Box(name: path.lastPathComponent, a: 2000, b: 663, c: 2449, d: 896, label: "maize", coordType: .XYX2Y2),
+            Box(name: path.lastPathComponent, a: 1622, b: 800, c: 1758, d: 934, label: "maize_stem", coordType: .XYX2Y2),
+            Box(name: path.lastPathComponent, a: 2186, b: 723, c: 2341, d: 881, label: "maize_stem", coordType: .XYX2Y2)
         ]
         
         do {
             let boxes = try parser.parseYoloTxtFile(path, coordType: .XYX2Y2, coordSystem: .absolute)
             
-            print(Set(boxes))
             XCTAssert(Set(boxes) == Set(refboxes))
             
         } catch {
-            print("ERROR")
-            XCTAssert(true)
+            XCTAssert(false)
         }
     }
 }

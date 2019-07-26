@@ -48,7 +48,7 @@ class Evaluator {
             evaluation.totalPositive = groundTruthBoxes.count
             
             // Loop through images
-            // Don't know if its a good idea... Maybe just go through sorted boxes
+            // Don't know if its a good idea... Maybe just go through all sorted boxes
             for image in detectionBoxes.imageNames {
                 var detections = detectionBoxes.getBoundingBoxesByName(image)
                 let groundTruth = groundTruthBoxes.getBoundingBoxesByName(image)

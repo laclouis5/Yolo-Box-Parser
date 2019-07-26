@@ -11,7 +11,6 @@ import Foundation
 enum YoloParserError: Error {
     case folderNotListable(_ folder: URL)
     case unreadableAnnotation(_ file: URL)
-    case unreadableImage(_ image: URL) // Obsolete
     case invalidLineFormat(file: URL, line: [String])
 }
 

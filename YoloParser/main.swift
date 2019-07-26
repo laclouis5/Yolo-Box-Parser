@@ -15,18 +15,16 @@ let pathDet = basePath.appendingPathComponent("detection-results")
 
 do {
     let parser = Parser()
+    let evaluator = Evaluator()
     var boxes = try parser.parseYoloFolder(pathGT)
     boxes += try parser.parseYoloFolder(pathDet)
 //    let boxes = TestData().data
+    
     boxes.dispStats()
-    
-    let evaluator = Evaluator()
     evaluator.evaluate(on: boxes)
-    
-    evaluator.detail.forEach { (eval) in
-        print(eval)
+    evaluator.detail.forEach { (evaluation) in
+        print(evaluation)
     }
-    
 } catch YoloParserError.folderNotListable(let folderURL) {
     print("Folder not readable: \(folderURL)")
 }

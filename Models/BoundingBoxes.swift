@@ -8,29 +8,24 @@
 
 import Foundation
 
+// TODO: Test this with a Set
 extension Array where Element == Box {
     
     // MARK: - Computed Properties
     var labels: [String] {
-        var labels = [String]()
+        var labs = [String]()
         for box in self {
-            let label = box.label
-            if !labels.contains(label) {
-                labels.append(label)
-            }
+            labs.append(box.label)
         }
-        return labels.sorted()
+        return Set(labs).sorted()
     }
     
     var imageNames: [String] {
-        var imageNames = [String]()
+        var names = [String]()
         for box in self {
-            let imageName = box.name
-            if !imageNames.contains(imageName) {
-                imageNames.append(imageName)
-            }
+            names.append(box.name)
         }
-        return imageNames.sorted()
+         return Set(names).sorted()
     }
     
     func dispStats() {

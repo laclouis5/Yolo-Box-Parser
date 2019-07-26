@@ -17,3 +17,6 @@ File format for ground truth:
 <label> <x> <y> <w> <h>
 ...
 ````
+
+## TODO
+Optimize `getBoundingBoxesBy...()` methods.

@@ -8,7 +8,6 @@
 
 import Foundation
 
-// TODO: Test this with a Set
 extension Array where Element == Box {
     
     // MARK: - Computed Properties
@@ -67,6 +66,16 @@ extension Array where Element == Box {
     
     func getBoundingBoxesByName(_ names: [String]) -> [Box] {
         return self.filter { names.contains($0.name) }
+    }
+    
+    func getBoundingBoxesByNameV2() -> [String: [Box]] {
+        return self.reduce(into: [String:[Box]](), { (result, box) in
+            if result[box.name] != nil {
+                result[box.name]!.append(box)
+            } else {
+                result[box.name] = [box]
+            }
+        })
     }
     
     mutating func mapLabels(with labels: [String: String]) {

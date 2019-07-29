@@ -22,6 +22,7 @@ do {
     
     boxes.dispStats()
     evaluator.evaluate(on: boxes)
+    evaluator.test(on: boxes)
     evaluator.detail.forEach { (evaluation) in
         print(evaluation)
     }

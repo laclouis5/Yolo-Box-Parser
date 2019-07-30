@@ -48,27 +48,19 @@ extension Array where Element == Box {
     }
     
     // MARK: - Methods
-    func getBoundingBoxesByLabel(_ labels: String...) -> [Box] {
-        return self.filter { labels.contains($0.label) }
-    }
-    
-    func getBoundingBoxesByLabel(_ labels: [String]) -> [Box] {
-        return self.filter { labels.contains($0.label) }
+    func getBoundingBoxesByLabel(_ label: String) -> [Box] {
+        return self.filter { $0.label == label }
     }
     
     func getBoundingBoxesByDetectionMode(_ detectionMode: Box.DetectionMode) -> [Box] {
         return self.filter { $0.detectionMode == detectionMode }
     }
     
-    func getBoundingBoxesByName(_ names: String...) -> [Box] {
-        return self.filter { names.contains($0.name) }
+    func getBoundingBoxesByName(_ name: String) -> [Box] {
+        return self.filter { $0.name == name }
     }
     
-    func getBoundingBoxesByName(_ names: [String]) -> [Box] {
-        return self.filter { names.contains($0.name) }
-    }
-    
-    func getBoundingBoxesByNameV2() -> [String: [Box]] {
+    func getBoxesDictByName() -> [String: [Box]] {
         return self.reduce(into: [String:[Box]](), { (result, box) in
             if result[box.name] != nil {
                 result[box.name]!.append(box)

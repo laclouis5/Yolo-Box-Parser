@@ -24,7 +24,7 @@ struct Parser {
         }
         
         for line in content.split(separator: "\n") {
-            let line = line.split(separator: " ")
+            let line = line.split(separator: " ", maxSplits: 5)
             let label = String(line[0])
             
             // Case Ground Truth

@@ -19,12 +19,14 @@ do {
     var boxes = try parser.parseYoloFolder(pathGT)
     boxes += try parser.parseYoloFolder(pathDet)
 //    let boxes = TestData().data
-    
     boxes.dispStats()
+    
     evaluator.evaluate(on: boxes)
-    evaluator.detail.forEach { (evaluation) in
-        print(evaluation)
-    }
+    evaluator.dispStats()
+    
+    print(evaluator.detail["maize"]!.precisions)
+    print(evaluator.detail["maize"]!.recalls)
+    
 } catch YoloParserError.folderNotListable(let folderURL) {
     print("Folder not readable: \(folderURL)")
 }

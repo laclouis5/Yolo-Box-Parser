@@ -11,20 +11,12 @@ import Foundation
 extension Array where Element == Box {
     
     // MARK: - Computed Properties
-    var labels: [String] {
-        var labs = [String]()
-        for box in self {
-            labs.append(box.label)
-        }
-        return Set(labs).sorted()
+    var labels: Set<String> {
+        return Set(self.map { $0.label })
     }
     
-    var imageNames: [String] {
-        var names = [String]()
-        for box in self {
-            names.append(box.name)
-        }
-         return Set(names).sorted()
+    var imageNames: Set<String> {
+        return Set(self.map { $0.name })
     }
     
     func dispStats() {
@@ -36,7 +28,7 @@ extension Array where Element == Box {
         description += "Detection Count:    \(detBoxes.count)\n"
         description += "Number of labels:   \(gtBoxes.labels.count)\n"
         
-        for label in gtBoxes.labels {
+        for label in gtBoxes.labels.sorted() {
             let labelBoxes = gtBoxes.getBoundingBoxesByLabel(label)
             
             description += "\(label.uppercased())\n"
@@ -61,12 +53,14 @@ extension Array where Element == Box {
     }
     
     func getBoxesDictByName() -> [String: [Box]] {
-        return self.reduce(into: [String:[Box]](), { (result, box) in
-            if result[box.name] != nil {
-                result[box.name]!.append(box)
-            } else {
-                result[box.name] = [box]
-            }
+        return self.reduce(into: [:], { (dict, box) in
+            dict[box.name, default: [box]].append(box)
+        })
+    }
+    
+    func getBoxesDictByLabel() -> [String: [Box]] {
+        return self.reduce(into: [:], { (dict, box) in
+            dict[box.name, default: [box]].append(box)
         })
     }
     
